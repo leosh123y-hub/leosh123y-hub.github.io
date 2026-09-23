@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat Overlay</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            margin: 40px auto;
+            max-width: 400px;
+            padding: 10px;
+        }
+
+        /* Conteneur principal du chat */
+        .chat-container {
+            background: #242526;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 1px solid #3a3b3c;
+        }
+
+        /* En-tête du chat */
+        .chat-header {
+            background: #2f3031;
+            padding: 12px;
+            color: #e4e6eb;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #3a3b3c;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #e41e3f;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+
+        /* Zone de défilement des messages */
+        #chatbox {
+            height: 350px;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Style des messages individuels */
+        .msg {
+            font-size: 13.5px;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease-in-out;
+            color: #e4e6eb;
+        }
+
+        .pseudo {
+            font-weight: bold;
+            color: #45bd62; /* Couleur verte style gamer / bot */
+            margin-right: 5px;
+        }
+
+        /* Zone de texte bloquée en bas */
+        .chat-footer {
+            padding: 15px;
+            background: #2f3031;
+            border-top: 1px solid #3a3b3c;
+            text-align: center;
+        }
+
+        .lock-message {
+            color: #f5c518;
+            font-weight: bold;
+            font-size: 13px;
+            background: rgba(245, 197, 24, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px dashed #f5c518;
+        }
+
+        /* Animations */
+        @keyframes blink {
+            0% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.2;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <!-- Haut du chat -->
+        <div class="chat-header">
+            <span class="live-dot"></span> Discussion en direct
+        </div>
+
+        <!-- Corps du chat (les messages vont apparaître ici) -->
+        <div id="chatbox"></div>
+
+        <!-- Bas du chat (Bloqué) -->
+        <div class="chat-footer">
+            <div class="lock-message">⚠️ You need 200000 clicks to chat</div>
+        </div>
+    </div>
+
+    <script>
+                // Liste de vos messages prédéfinis
+const phrases = [
+    "ça marche vraiment!",
+    "Now I have 10000 robux in only 3 days of afk!!",
+    "its easy!",
+    "omg it work!",
+    "j'ai eu strawbery elephant",
+    "iv got an iphone",
+    "the iphone is really arrived",
+    "Thx!!!",
+    "This is the best website ever!",
+    "Merci pour les robux!!!!!",
+    "Merci!!",
+    "omg I got a new phone!!!",
+    "l'Iphone 17 est vraiment arrivé merci!!!",
+    "Thx!",
+    "hi",
+    "it took a lile bit of time but its work!",
+    "how are you sammy its really you?",
+    "C'est gentil pour les 1000 robux en seulement 3h d'afk!",
+    "ça vaut le coup!!",
+    "Its really not a scam!",
+    "ça marche vraiment crois moi!",
+    "OMGGGGGGGGGGGG",
+    "Wow im shocked right now",
+    "Is this real life??",
+    "Je viens de recevoir les robux sur mon compte !!",
+    "My brother told me about this and it actually works",
+    "i can finally buy the limited item !",
+    "le livreur vient de passer pour l'iphone !!",
+    "So easy haha",
+    "i love this stream so much",
+    "Best giveaway ever",
+    "incroyable mais vrai",
+    "I was skeptical at first but wow",
+    "my friends are gonna be so jealous",
+    "J'ai enfin mon strawberry elephant j'y crois pas !",
+    "Finally!!!",
+    "Can someone help me click faster?",
+    "J'adore ce site",
+    "mon compteur augmente trop vite",
+    "Does it work on mobile?",
+    "Yes it works on mobile bro!",
+    "Oui ça marche sur téléphone",
+    "TYSM sammy !!!",
+    "tung tung tung !!",
+    "génial !",
+    "I can buy so many gamepasses now",
+    "Je vais tester tout de suite",
+    "Just got 50k robux let's goooo",
+    "L'iphone 17 est incroyable",
+    "L'appareil photo de l'iphone est fou",
+    "Wait what? It actually sent?",
+    "Perfect!",
+    "Super cool",
+    "Merci beaucoup !!",
+    "No way !",
+    "C'est pas du mytho foncez",
+    "I'm at 150k clicks right now",
+    "Presque au chat public !",
+    "Need more clicks",
+    "Click click click",
+    "ça marche super bien",
+    "I got the strawberry elephant too !!!",
+    "So hype !!",
+    "Est-ce que quelqu'un a eu l'iphone 16 ?",
+    "Moi j'ai eu le 17直接 !",
+    "This is crazy",
+    "Can't stop clicking",
+    "Mon afk fonctionne de fou",
+    "3 days of afk was worth it",
+    "je kiffe",
+    "merci l'équipe",
+    "How long did it take for the robux?",
+    "About 10 minutes for me !",
+    "Pour moi ça a pris 5 minutes",
+    "wtfffff it worked",
+    "Incroyable",
+    "Je revis",
+    "Free robux for real",
+    "My account is loaded now",
+    "Je vais acheter le pack de l'éléphant",
+    "Strawberry elephant gang 🍓🐘",
+    "Un truc de dingue",
+    "Nouveau téléphone gratuit lol",
+    "I love tungtungtung",
+    "The best website in 2026",
+    "Foncez avant que ça ferme",
+    "Is the giveaway still open?",
+    "Yes it's open !",
+    "Oui c'est encore actif",
+    "Incroyable merci sammy",
+    "Best stream",
+    "Je l'ai partagé à toute ma classe",
+    "Mon cousin vient de l'avoir aussi",
+    "Awesome !!",
+    "Legit 100%",
+    "Pas de arnaque ici",
+    "Trop content",
+    "My hands hurt from clicking haha",
+    "Use auto clicker bro",
+    "L'afk c'est mieux !",
+    "Merci infiniment",
+
+];
+
+const pseudos = [
+    "Mercipourlegiveaway!!!", "Shadow_X", "Lily_Blox", "NoobMaster", "Alex_2014",
+    "RobloxFan", "IphoneLover", "Max_Power", "EmmaStar", "Vortex_FR", "Titouan_2022!",
+    "sammy", "tungtungtungsahur", "James09", "TheRoBl0xer", "Alexisprime", "Bombardilocrocodilo",
+    "GamerBoy_99", "ProClicker_X", "RobuxKing", "IphoneMaster", "Strawberry_Fan", "SpeedyClick",
+    "Lucas_A", "Chloé_B", "DarkSasuke", "HyperVoid", "Galaxy_Girl", "Ninja_Blox",
+    "PixelArt", "Alpha_Numeric", "Sofiane_93", "Matteo_Z", "Inès_Star", "LeVraiAbonné",
+    "GiveawayHunter", "ClickBot_01", "FreeStuffLover", "Robloxian_3000", "AppleFanboy", "TechReviewer",
+    "Sarah_M", "Thomas_T", "Hugo_Pro", "Léa_L", "Nathan_N", "Zoé_Z",
+    "Mister_Click", "Lady_Click", "GlitchMaster", "CodeBreaker", "Cyber_Ghost", "Neon_Light",
+    "Sonic_Speed", "Mario_Fan", "Zelda_Link", "Pokemon_Trainer", "Dragon_Ball", "Naruto_U",
+    "Luffy_Gear5", "Zoro_R", "Nami_G", "Sanji_K", "Chopper_D", "Robin_N",
+    "Franky_S", "Brook_M", "Jinbe_F", "Ace_Fire", "Sabo_Revolution", "Law_Room",
+    "Kid_Magnet", "Shanks_Red", "Kaido_Beast", "BigMom_Cake", "Whitebeard_O", "Blackbeard_T",
+    "Garp_Fist", "Sengoku_Buddha", "Akainu_Magma", "Aokiji_Ice", "Kizaru_Light", "Fujitora_Gravity",
+    "Ryokugyu_Forest", "Smoker_Smoke", "Tashigi_Sword", "Coby_Hero", "Helmeppo_K", "Buggy_Clown",
+    "Alvida_Iron", "Arlong_Shark", "Crocodile_Sand", "Enel_Lightning", "Lucci_Leopard", "Moria_Shadow",
+    "Doflamingo_String", "Katakuri_Mochi", "King_Fire", "Queen_Plague", "Jack_Drought"
+];
+
+
+                const chatbox = document.getElementById("chatbox");
+
+                // Fonction pour ajouter un faux message aléatoire
+                function ajouterFauxMessage() {
+                    // Choix au hasard d'un pseudo et d'un message
+                    const fauxPseudo = pseudos[Math.floor(Math.random() * pseudos.length)];
+                    const fauxMessage = phrases[Math.floor(Math.random() * phrases.length)];
+
+                    // Création de l'élément HTML du message
+                    const div = document.createElement("div");
+                    div.className = "msg";
+                    div.innerHTML = `<span class="pseudo">${fauxPseudo}:</span> ${fauxMessage}`;
+
+                    // Ajout dans la boîte de chat
+                    chatbox.appendChild(div);
+
+                    // Défiler automatiquement vers le bas à chaque nouveau message
+                    chatbox.scrollTop = chatbox.scrollHeight;
+                }
+
+                // Affiche un premier message immédiatement à l'ouverture de la page
+                ajouterFauxMessage();
+
+                // Ajoute un nouveau message automatiquement TOUTES LES 10 SECONDES (10000 millisecondes)
+                setInterval(ajouterFauxMessage, 250);
+    </script>
+</body>
+</html>

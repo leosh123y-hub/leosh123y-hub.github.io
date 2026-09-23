@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giveaway</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url(fondecran.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: sans-serif;
+        }
+
+        /* Conteneur principal pour laisser la place aux pubs sur les côtés */
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Style des barres publicitaires latérales */
+        .sidebar-ad {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 160px; /* Largeur standard pour les bannières de type SkyScraper (120x600 ou 160x600) */
+            height: 600px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px dashed #e41e3f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px black;
+            z-index: 1000;
+        }
+
+        .ad-left {
+            left: 20px;
+        }
+
+        .ad-right {
+            right: 20px;
+        }
+
+        /* Masquer les pubs sur les écrans très petits (mobiles) pour éviter de bloquer le jeu */
+        @media (max-width: 1150px) {
+            .sidebar-ad {
+                display: none;
+            }
+        }
+
+        .clicker,
+        h1,
+        .score {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            top: 20px; /* Ajusté pour un meilleur rendu global */
+            left: 0;
+        }
+
+        .clicker img:hover {
+            transform: scale(1.1);
+        }
+
+        .clicker img:active {
+            transform: scale(1);
+        }
+
+        .clicker img {
+            --size: 100px;
+            width: var(--size);
+            height: var(--size);
+            transition: transform .2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .boutique {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .boutique img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .gallery-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .gallery-container img {
+            margin: 5px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PUB CÔTÉ GAUCHE -->
+    <div class="sidebar-ad ad-left">
+        <!-- REMPLACEZ LE TEXTE CI-DESSOUS PAR LE CODE SCRIPT DE VOTRE RÉGIE PUB -->
+        <p>PUB GAUCHE</p>
+    </div>
+
+    <!-- PUB CÔTÉ DROITE -->
+    <div class="sidebar-ad ad-right">
+        <!-- REMPLACEZ LE TEXTE CI-DESSOUS PAR LE CODE SCRIPT DE VOTRE RÉGIE PUB -->
+        <p>PUB DROITE</p>
+    </div>
+
+    <!-- CONTENU DU JEU -->
+    <div class="main-content">
+        <h1>Tung Tung Tung Giveaway</h1>
+        <h3 class="score">Score : 0</h3>
+
+        <div class="clicker">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.F7VXiHD52Ofym7Jcws9g0QHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Clicker">
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="chatendirect.html" target="_blank" style="position: relative; z-index: 9999; display: inline-block; padding: 12px 24px; background-color: #e41e3f; color: white; text-decoration: none; font-weight: bold; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                Live chat!
+            </a>
+        </div>
+
+        <h1 style="font-size: 1.5rem; text-align: center; margin-top: 40px;">double clicks rate : 100000!!!!!!</h1>
+        <h1 style="font-size: 1.5rem; text-align: center;">Iphone 17 : 100000 clicks!!!!!</h1>
+        <h1 style="font-size: 1.5rem; text-align: center;">1 clicks = 1 robux from 500000 clicks!!!!!</h1>
+        <h1 style="font-size: 1.5rem; text-align: center;">Strawberry elephant : 10000000 clicks!!!</h1>
+
+        <div class="Iphone 16"></div>
+
+        <div class="gallery-container">
+            <a href="robux.html" target="_blank">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.TumDHNfuSL9GZswbQFt3AwHaEK?r" alt="" style="width: 256px; height: 128px; object-fit: cover;">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.0EoVw0694MhP9KzVwpO_aAHaE4?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="" style="width: 256px; height: 128px; object-fit: cover;">
+                <img src="https://tse1.mm.bing.net/th/id/OIF.dEpP453PJPkMxHurheUxyA?r" alt="Boutique" style="width: 256px; height: 128px; object-fit: cover;">
+            </a>
+        </div>
+
+        <div class="gallery-container">
+            <a href="robux.html" target="_blank">
+                <img src="https://tse4.mm.bing.net/th/id/OIF.eNt4BVEQFXZaWRWVgC03WQ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="" style="width: 256px; height: 128px; object-fit: cover;">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.pUPPdwk_ieCT_wXBt6hG1QHaEH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="" style="width: 256px; height: 128px; object-fit: cover;">
+                <img src="https://i.f1g.fr/media/cms/704x396_cropupscale/2026/07/29/e14a70570677827abf2035548aaec264af3ebe04881e1f2149bc714c526186e5.jpg" alt="Boutique" style="width: 256px; height: 128px; object-fit: cover;">
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <audio controls autoplay loop src="brainrot.mp3">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        const clicker = document.querySelector(".clicker");
+        const score_div = document.querySelector(".score");
+
+        let score = parseInt(localStorage.getItem("clicker_score")) || 0;
+        let multiplier = 1;
+
+        score_div.innerText = "Score : " + score;
+
+        if (score >= 100000) {
+            multiplier = 2;
+        }
+
+        clicker.addEventListener("click", () => {
+            score = score + multiplier;
+
+            if (score >= 100000) {
+                multiplier = 2;
+            }
+
+            score_div.innerText = "Score : " + score;
+            localStorage.setItem("clicker_score", score);
+        });
+
+        const autoIncrement = setInterval(() => {
+            if (score >= 1000000) {
+                clearInterval(autoIncrement);
+                return;
+            }
+            score++;
+            score_div.innerText = "Score : " + score;
+            localStorage.setItem("clicker_score", score);
+        }, 2000);
+    </script>
+
+</body>
+</html>
